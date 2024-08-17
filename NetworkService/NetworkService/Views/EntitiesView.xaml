@@ -1,0 +1,251 @@
+﻿<UserControl x:Class="NetworkService.Views.EntitiesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
+             xmlns:model="clr-namespace:NetworkService.Model"
+             mc:Ignorable="d" 
+             d:DesignHeight="560" d:DesignWidth="400">
+    <UserControl.DataContext>
+        <viewModel:EntitiesViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Network Entities View"
+                       Foreground="{StaticResource AccentColor}"
+                       HorizontalAlignment="Center"
+                       FontSize="25"
+                       Margin="10"
+                       FontWeight="Bold"/>
+            <Rectangle Height="2" Fill="{StaticResource AccentColor}"
+                       Width="350"
+                       />
+            <TextBlock Text="Filter by"
+                       HorizontalAlignment="Center"
+                       FontWeight="DemiBold"
+                       Foreground="{StaticResource SecondaryColor}"
+                       FontSize="20"/>
+            <Grid Height="120">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="195"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="195"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Type:" 
+                           HorizontalAlignment="Center"
+                           Foreground="{StaticResource SecondaryColor}"
+                           FontSize="18"/>
+                <ComboBox Height="30" 
+                          Width="130"
+                          Grid.Row="1"
+                          Grid.RowSpan="2"
+                          SelectedItem="{Binding SelectedType}"
+                          ItemsSource="{Binding FilterTypes}"
+                          HorizontalAlignment="Center"/>
+
+                <Rectangle Grid.Column="1"
+                           Height="100"
+                           Width="2"
+                           Grid.RowSpan="3"
+                           Fill="{StaticResource SecondaryColor}"/>
+                <TextBlock Text="ID:" 
+                           FontSize="18"
+                           Grid.Column="2"
+                           HorizontalAlignment="Center"
+                           Foreground="{StaticResource SecondaryColor}"/>
+                <Grid Grid.Row="1" 
+                      Grid.Column="2" 
+                      Grid.RowSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Margin="5"
+                                  IsChecked="{Binding GreaterChecked}"/>
+                        <Label Foreground="{StaticResource AccentColor}"
+                               Content=">"
+                               Margin="0 0 0 5"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Row="1">
+                        <CheckBox Margin="5" 
+                                  IsChecked="{Binding EqualChecked}"/>
+                        <Label Foreground="{StaticResource AccentColor}"
+                               Content="="
+                               Margin="0 0 0 5"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Row="2">
+                        <CheckBox Margin="5"
+                                  IsChecked="{Binding LesserChecked}"/>
+                        <Label Foreground="{StaticResource AccentColor}"
+                               Content="&lt;"
+                               Margin="0 0 0 5"/>
+                    </StackPanel>
+                    <TextBox Height="30"
+                             Text="{Binding FilterIDTxt}"
+                             Width="100"
+                             Grid.Column="1"
+                             Grid.RowSpan="3"
+                             Margin="0 0 10 0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding GotFCommand}"
+                                                       CommandParameter="{Binding FilterIDTxt}"/>
+                                
+                                
+                            </i:EventTrigger>
+                           
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </Grid>
+            </Grid>
+            <Button Style="{StaticResource AddBtnStyle}"
+                    HorizontalAlignment="Center"
+                    Margin="0 0 0 5"
+                    Content="Filter"
+                    Command="{Binding FilterCommand}"/>
+            <DataGrid Style="{StaticResource DataGridStyle}"
+                      RowStyle="{StaticResource DataGridRowStyle}"
+                      ItemsSource="{Binding ToBeShown}"
+                      AutoGenerateColumns="False"
+                      Margin="0 0 0 5"
+                      IsReadOnly="True">
+               
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="0.5*"
+                        Header="ID" 
+                        Binding="{Binding Id}"/>
+                    <DataGridTextColumn 
+                        Width="*" 
+                        Header="Label" 
+                        Binding="{Binding Label}"/>
+                    <DataGridTextColumn
+                        Width="2*"
+                        Header="Type"
+                        Binding="{Binding EntityType}"/>
+                    <DataGridTextColumn
+                        Width="0.7*"
+                        Header="Temp"
+                        Binding="{Binding Temperature[0]}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Label Content="Delete Entity| ID:"
+                       Foreground="{StaticResource AccentColor}"
+                       FontSize="20"/>
+                <TextBox Height="30"
+                             Text="{Binding DeleteID}"
+                             Width="80">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="GotFocus">
+                            <i:InvokeCommandAction Command="{Binding GotDeleteCommand}"/>
+
+
+                        </i:EventTrigger>
+
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <Button Style="{StaticResource AddBtnStyle}"
+                        Margin="10 0 0 0"
+                        Content="Delete"
+                        Command="{Binding DeleteCommand}"/>
+            </StackPanel>
+            <Rectangle Margin="0 5 0 0" Height="2" Fill="{StaticResource AccentColor}"
+                       Width="350"/>
+            <TextBlock Text="Add new Entity"
+                       Foreground="{StaticResource AccentColor}"
+                       HorizontalAlignment="Center"
+                       FontSize="25"
+                       Margin="10 10 10 0"
+                       FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="50 0 0 0">
+                    <Label HorizontalAlignment="Center"
+                           Foreground="{StaticResource AccentColor}"
+                           Content="ID:"/>
+                    <TextBox Height="30"
+                             Text="{Binding CurrentEntity.Id}"
+                             Width="80">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding GotIDCommand}"/>
+
+
+                            </i:EventTrigger>
+
+                        </i:Interaction.Triggers>
+                    </TextBox>
+
+                </StackPanel>
+                <StackPanel Margin="30 0 0 0">
+                    <Label HorizontalAlignment="Center"
+                           Foreground="{StaticResource AccentColor}"
+                           Content="Label"/>
+                    <TextBox Height="30"
+                             Width="80"
+                             Text="{Binding CurrentEntity.Label}" TextChanged="TextBox_TextChanged">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding GotLabelCommand}"/>
+
+
+                            </i:EventTrigger>
+
+                        </i:Interaction.Triggers>
+                    </TextBox>
+
+                </StackPanel>
+                <StackPanel Margin="30 0 0 0">
+                    <Label HorizontalAlignment="Center"
+                           Foreground="{StaticResource AccentColor}"
+                           Content="Type:"/>
+                    <ComboBox Height="30"
+                              Width="80"
+                              ItemsSource="{Binding Source={StaticResource enmPositions}}"
+                              SelectedItem="{Binding CurrentEntity.EntityType}">
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Foreground="{StaticResource TertiaryColor}"
+                       Content="{Binding CurrentEntity.ValidationErrors[Id]}"
+                       Width="100"
+                       HorizontalAlignment="Center"
+                       Margin="45 0 0 0"/>
+                <Label Foreground="{StaticResource TertiaryColor}"
+                       Content="{Binding CurrentEntity.ValidationErrors[Label]}"
+                       MaxWidth="150"
+                       HorizontalAlignment="Center"
+                       Margin="5 0 0 0"/>
+            </StackPanel>
+            <Button Margin="0 0 0 0" 
+                    Style="{StaticResource AddBtnStyle}"
+                    Content="Add"
+                    Command="{Binding AddCommand}"/>
+            <Label HorizontalAlignment="Center" Foreground="LightGreen"
+                   Content="{Binding InfoMessage}"/>
+            
+        </StackPanel>
+       
+    </Grid>
+</UserControl>

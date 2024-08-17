@@ -1,0 +1,17 @@
+C:\Users\nikol\Desktop\NetworkService\NetworkService\bin\Debug\NetworkService.exe.config
+C:\Users\nikol\Desktop\NetworkService\NetworkService\bin\Debug\NetworkService.exe
+C:\Users\nikol\Desktop\NetworkService\NetworkService\bin\Debug\NetworkService.pdb
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\NetworkService.csproj.AssemblyReference.cache
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\NetworkService.csproj.SuggestedBindingRedirects.cache
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\MainWindow.g.cs
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\App.g.cs
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\NetworkService_MarkupCompile.cache
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\NetworkService_MarkupCompile.lref
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\MainWindow.baml
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\NetworkService.g.resources
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\NetworkService.Properties.Resources.resources
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\NetworkService.csproj.GenerateResource.cache
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\NetworkService.csproj.CoreCompileInputs.cache
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\NetworkService.exe
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\NetworkService.pdb
+C:\Users\nikol\Desktop\NetworkService\NetworkService\obj\Debug\GeneratedInternalTypeHelper.g.cs

@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="NetworkService.Views.GraphView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="560" d:DesignWidth="400">
+    <UserControl.DataContext>
+        <viewModel:GraphViewModel/>
+    </UserControl.DataContext>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Measurment Graph View"
+                       Foreground="{StaticResource AccentColor}"
+                       HorizontalAlignment="Center"
+                       FontSize="25"
+                       Margin="10"
+                       FontWeight="Bold"/>
+            <Rectangle Height="2" Fill="{StaticResource AccentColor}"
+                       Width="350"
+                       />
+            
+            <StackPanel Orientation="Horizontal"
+                        Margin="70 10 0 0">
+                <Label Content="Select Entity:"
+                       Foreground="{StaticResource AccentColor}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18"/>
+                <ComboBox Height="30"
+                          Width="100"
+                          HorizontalAlignment="Center"
+                          Margin="0 0 0 0"
+                          SelectedItem="{Binding Selected}"
+                          ItemsSource="{Binding AllEnt}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding GenerateCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+
+            </StackPanel>
+           
+        </StackPanel>
+        <Rectangle Grid.Row="1"
+                   Height="270"
+                   Width="3"
+                   Fill="{StaticResource AccentColor}"
+                   HorizontalAlignment="Left"
+                   Margin="100 0 0 0"/>
+        <Rectangle Grid.Row="1"
+                   Height="3"
+                   Width="270"
+                   Fill="{StaticResource AccentColor}"
+                   HorizontalAlignment="Left"
+                   Margin="90 240 0 0"/>
+       
+        <StackPanel Grid.Row="1">
+            <Label Content="350"
+                   Foreground="{StaticResource AccentColor}"
+                   FontSize="16" Margin="50 80 0 0"/>
+            <Label Content="325"
+                   Foreground="{StaticResource AccentColor}"
+                   FontSize="16" Margin="50 20 0 0"/>
+            <Label Content="300"
+                   Foreground="{StaticResource AccentColor}"
+                   FontSize="16" Margin="50 20 0 0"/>
+            <Label Content="275"
+                   Foreground="{StaticResource AccentColor}"
+                   FontSize="16" Margin="50 20 0 0"/>
+            <Label Content="250"
+                   Foreground="{StaticResource AccentColor}"
+                   FontSize="16" Margin="50 20 0 0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1">
+            <Canvas Height="230"
+                    Width="250"
+                    Margin="100"
+                    >
+                <Rectangle Canvas.Left="10"
+                           Canvas.Bottom="0"
+                           Fill="{Binding B1}"
+                           Height="{Binding Height1}"
+                           Width="30"/>
+                <Rectangle Canvas.Left="60"
+                           Canvas.Bottom="0"
+                           Fill="{Binding B2}"
+                           Height="{Binding Height2}"
+                           Width="30"/>
+                <Rectangle Canvas.Left="110"
+                           Canvas.Bottom="0"
+                           Fill="{Binding B3}"
+                           Height="{Binding Height3}"
+                           Width="30"/>
+                <Rectangle Canvas.Left="160"
+                           Canvas.Bottom="0"
+                           Fill="{Binding B4}"
+                           Height="{Binding Height4}"
+                           Width="30"/>
+                <Rectangle Canvas.Left="210"
+                           Canvas.Bottom="0"
+                           Fill="{Binding B5}"
+                           Height="{Binding Height5}"
+                           Width="30"/>
+            </Canvas>
+            
+        </StackPanel>
+        
+    </Grid>
+    
+</UserControl>

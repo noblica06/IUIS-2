@@ -1,0 +1,112 @@
+﻿<Window x:Class="NetworkService.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NetworkService"
+        xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
+        xmlns:views="clr-namespace:NetworkService.Views"
+        mc:Ignorable="d"
+        Background="Transparent"
+        WindowStyle="None"
+        Name ="MainWindowRef"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="700" Width="400">
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding NavCommand}"
+                    CommandParameter="home"
+                    Key="M"/>
+    </Window.InputBindings>
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+            <views:HomeView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:EntitiesViewModel}">
+            <views:EntitiesView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:DisplayViewModel}">
+            <views:DisplayView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:GraphViewModel}">
+            <views:GraphView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="199*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border Background="{StaticResource PrimaryColor}" Grid.ColumnSpan="2"/>
+
+        <Grid Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="560"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <!--Backgrounds-->
+            <Border Grid.Row="3"
+                    Background="Black"/>
+            <Border Grid.Row="0"
+                    Background="{StaticResource SecondaryColor}"/>
+            <!--WindowTitle and CloseBtn-->
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal">
+                <TextBlock FontSize="30" 
+                           Foreground="White"
+                           Text="{Binding WindowTitle}" 
+                           Margin="5"
+                           Width="250"/>
+                <Button Margin="90 10 5 5"
+                        Cursor="Hand"
+                        Style="{StaticResource CloseBtnStyle}"
+                        Command="{Binding CloseWindowCommand}"
+                        CommandParameter="{Binding ElementName=MainWindowRef}"
+                        />
+            </StackPanel>
+            <!--ViewShowing-->
+            <ContentControl Grid.Row="1"
+                            Height="560"
+                            Width="400"
+                            Content="{Binding CurrentViewModel}"/>
+            <!--Navigation Buttnos-->
+            <StackPanel Grid.Row="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Content="Entities View"
+                        Style="{StaticResource DockBtnStyle}"
+                        Command="{Binding NavCommand}"
+                        CommandParameter="entity"
+                        IsEnabled="{Binding EntityIE}"/>
+                <Button Content="Display View"
+                        Style="{StaticResource DockBtnStyle}"
+                        Command="{Binding NavCommand}"
+                        IsEnabled="{Binding DisplayIE}"
+                        CommandParameter="display"/>
+                <Button Content="Graph View"
+                        Style="{StaticResource DockBtnStyle}"
+                        Command="{Binding NavCommand}"
+                        IsEnabled="{Binding GraphIE}"
+                        CommandParameter="graph"/>
+            </StackPanel>
+            <!--Bottom Panel-->
+            <StackPanel Grid.Row="3"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Style="{StaticResource HomeBtnStyle}"
+                        Command="{Binding NavCommand}"
+                        Cursor="Hand"
+                        CommandParameter="home"/>
+                <Button Style="{StaticResource UndoBtnStyle}"
+                        Command="{Binding NavCommand}"
+                        Cursor="Hand"
+                        CommandParameter="undo"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
